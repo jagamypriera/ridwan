@@ -233,7 +233,7 @@ a,
 }
 .marquee-wrapper .marquee-block {
   width: 100%;
-  height: 4000px;
+  height: 3000px;
   overflow: hidden;
   box-sizing: border-box;
   position: relative;
