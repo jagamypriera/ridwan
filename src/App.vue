@@ -40,7 +40,7 @@ import TheWelcome from "./components/TheWelcome.vue";
     <div class="main-content">
       <div class="marquee-wrapper">
         <div class="container">
-          <div class="marquee-block" :style="{ height: marqueeHeight + 'px' }">
+          <div class="marquee-block" :style="{ height: infoHeight + 'px' }">
             <div class="marquee-inner to-left">
               <span ref="topMessage">
                 <TheWelcome />
