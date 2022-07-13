@@ -40,7 +40,7 @@ import TheWelcome from "./components/TheWelcome.vue";
     <div class="main-content">
       <div class="marquee-wrapper">
         <div class="container">
-          <div class="marquee-block" :style="{ height: infoHeight + 'px' }">
+          <div class="marquee-block">
             <div class="marquee-inner to-left">
               <span ref="topMessage">
                 <TheWelcome />
@@ -103,7 +103,6 @@ export default {
     marqueeHeight() {
       if (!this.isMounted) return 1000;
 
-      console.log(this.$refs.topMessage);
       return (
         this.$refs.topMessage.clientHeight +
         this.$refs.bottomMessage.clientHeight
@@ -113,7 +112,9 @@ export default {
   mounted() {
     this.isMounted = true;
     this.$nextTick(() => {
-      this.infoHeight = this.$refs.info.clientHeight + "px";
+      this.infoHeight =
+        this.$refs.topMessage.clientHeight +
+        this.$refs.bottomMessage.clientHeight;
     });
   },
 };
@@ -232,7 +233,7 @@ a,
 }
 .marquee-wrapper .marquee-block {
   width: 100%;
-  /* height: 1000px; */
+  height: 3000px;
   overflow: hidden;
   box-sizing: border-box;
   position: relative;
