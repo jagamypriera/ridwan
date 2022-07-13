@@ -68,6 +68,7 @@ export default {
       minutes: 0,
       seconds: 0,
       isMounted: false,
+      infoHeight: 1000,
     };
   },
   methods: {
@@ -111,6 +112,9 @@ export default {
   },
   mounted() {
     this.isMounted = true;
+    this.$nextTick(() => {
+      this.infoHeight = this.$refs.info.clientHeight + "px";
+    });
   },
 };
 </script>
