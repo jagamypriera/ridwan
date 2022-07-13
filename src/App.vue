@@ -38,8 +38,19 @@ import TheWelcome from "./components/TheWelcome.vue";
 
   <main>
     <div class="main-content">
-      <div class="marquee">
-        <TheWelcome />
+      <div class="marquee-wrapper">
+        <div class="container">
+          <div class="marquee-block" :style="{ height: marqueeHeight + 'px' }">
+            <div class="marquee-inner to-left">
+              <span ref="topMessage">
+                <TheWelcome />
+              </span>
+              <span ref="bottomMessage">
+                <TheWelcome />
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </main>
@@ -56,6 +67,7 @@ export default {
       hours: 0,
       minutes: 0,
       seconds: 0,
+      isMounted: false,
     };
   },
   methods: {
@@ -85,6 +97,20 @@ export default {
     actualTime() {
       this.compute();
     },
+  },
+  computed: {
+    marqueeHeight() {
+      if (!this.isMounted) return 1000;
+
+      console.log(this.$refs.topMessage);
+      return (
+        this.$refs.topMessage.clientHeight +
+        this.$refs.bottomMessage.clientHeight
+      );
+    },
+  },
+  mounted() {
+    this.isMounted = true;
   },
 };
 </script>
@@ -185,31 +211,54 @@ a,
   padding-right: 8px;
   height: 100vh;
   padding-left: 30px;
-  overflow: hidden;
-  position: relative;
-}
-
-.marquee {
-  /* box-sizing: border-box; */
-  animation: marquee 25s linear infinite;
-  display: block;
   /* overflow: hidden; */
-  padding-left: 30px;
-  /* height: 100vh; */
+  /* position: relative; */
+}
+
+.marquee-wrapper {
+  /* text-align: center; */
+}
+.marquee-wrapper .container {
+  overflow: hidden;
+  /* margin: 0 auto !important; */
+  /* text-align: center; */
+}
+.marquee-inner span {
+  height: 50%;
+}
+.marquee-wrapper .marquee-block {
+  width: 100%;
+  /* height: 1000px; */
+  overflow: hidden;
+  box-sizing: border-box;
+  position: relative;
+  padding: 30px 0;
+  float: left;
+}
+.marquee-inner {
+  display: block;
+  height: 200%;
+  /* width: 400px; */
   position: absolute;
+  padding-left: 20px;
+  /* margin: 20px 0 20px 70px; */
 }
 
-.marquee:hover {
-  animation-play-state: paused;
+.marquee-inner.to-left {
+  animation: marqueeTop 20s linear infinite;
+}
+.marquee-item {
+  display: block;
+  margin: 10px;
+  transition: all 0.2s ease-out;
 }
 
-/* Make it move! */
-@keyframes marquee {
-  10% {
+@keyframes marqueeTop {
+  0% {
     top: 0;
   }
   100% {
-    top: -250%;
+    top: -100%;
   }
 }
 </style>
