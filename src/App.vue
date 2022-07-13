@@ -250,7 +250,7 @@ a,
 }
 
 .marquee-inner.to-left {
-  animation: marqueeTop 20s linear infinite;
+  animation: marqueeTop 50s linear infinite;
 }
 .marquee-item {
   display: block;
